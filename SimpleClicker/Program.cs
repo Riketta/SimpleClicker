@@ -14,6 +14,7 @@ namespace SimpleClicker
     {
         static Random rand = new Random();
         static Win32.VirtualKeys ToggleClickingKey = Win32.VirtualKeys.Numpad4;
+        
         static Win32.VirtualKeys SuperClickingKey = Win32.VirtualKeys.Numpad5;
         static Win32.VirtualKeys HumanClickingKey = Win32.VirtualKeys.Numpad6;
         
@@ -61,6 +62,10 @@ namespace SimpleClicker
             //Console.ReadLine();
 
             ClickingType clickingType = ClickingType.Human;
+            Win32.VirtualKeys key = SpellKeyToSpam;
+            Console.WriteLine($"[!] Default mode: {clickingType}");
+            Console.WriteLine($"[!] Default key: {key}");
+
             Console.WriteLine("Clicking loop...");
             bool toggle = false;
             while (true)
@@ -106,7 +111,7 @@ namespace SimpleClicker
                     continue;
 
                 int delay = clickingType == ClickingType.Super ? 0 : GetHumanInputDelay();
-                WindowsManager.PressKey(handle, KeyToSpam, delay);
+                WindowsManager.PressKey(handle, key, delay);
                 Thread.Sleep(delay);
             }
         }
