@@ -80,7 +80,7 @@ namespace SimpleClicker
                 if (WindowsManager.IsKeyPressed(ToggleClickingKey))
                 {
                     toggle = !toggle;
-                    Console.WriteLine($"New state: {(toggle ? $"Clicking - [{clickingType}]" : "Not clicking")}.");
+                    Console.WriteLine($"[{(toggle ? "+" : "-")}] New state: {(toggle ? $"Clicking - [{clickingType}]" : "Not clicking")}.");
                 }
 
                 if (!toggle)
