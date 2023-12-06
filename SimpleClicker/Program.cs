@@ -56,7 +56,7 @@ namespace SimpleClicker
             //Console.WriteLine("Press Enter to start");
             //Console.ReadLine();
 
-            ClickingType clickingType = ClickingType.Super;
+            ClickingType clickingType = ClickingType.Human;
             Console.WriteLine("Clicking loop...");
             bool toggle = false;
             while (true)
