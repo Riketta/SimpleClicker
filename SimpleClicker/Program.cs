@@ -18,8 +18,8 @@ namespace SimpleClicker
         static Win32.VirtualKeys SuperClickingKey = Win32.VirtualKeys.Numpad5;
         static Win32.VirtualKeys HumanClickingKey = Win32.VirtualKeys.Numpad6;
         
-        static Win32.VirtualKeys SpellClickingKey = Win32.VirtualKeys.Numpad2;
-        static Win32.VirtualKeys InteractClickingKey = Win32.VirtualKeys.Numpad3;
+        static Win32.VirtualKeys SpellSwitchKey = Win32.VirtualKeys.Numpad2;
+        static Win32.VirtualKeys InteractSwitchKey = Win32.VirtualKeys.Numpad3;
 
         static Win32.VirtualKeys SpellKeyToSpam = Win32.VirtualKeys.Q;
         static Win32.VirtualKeys InteractKeyToSpam = Win32.VirtualKeys.Numpad0;
@@ -64,7 +64,7 @@ namespace SimpleClicker
             ClickingType clickingType = ClickingType.Human;
             Win32.VirtualKeys key = SpellKeyToSpam;
             Console.WriteLine($"[!] Default clicking mode: {clickingType}. To switch: [{ClickingType.Super} = {SuperClickingKey}], [{ClickingType.Human} = {HumanClickingKey}].");
-            Console.WriteLine($"[!] Default key to spam: {key}. To switch: [{SpellClickingKey} to spam {SpellKeyToSpam}], [{InteractClickingKey} to spam {InteractKeyToSpam}].");
+            Console.WriteLine($"[!] Default key to spam: {key}. To switch: [{SpellSwitchKey} to spam {SpellKeyToSpam}], [{InteractSwitchKey} to spam {InteractKeyToSpam}].");
             Console.WriteLine($"[!] Toggle key: [{ToggleClickingKey}]. Game window should be in focus.");
 
             Console.WriteLine("Clicking loop...");
@@ -87,14 +87,14 @@ namespace SimpleClicker
                     clickingType = ClickingType.Human;
                 }
 
-                if (WindowsManager.IsKeyPressed(SpellClickingKey))
+                if (WindowsManager.IsKeyPressed(SpellSwitchKey))
                 {
                     var oldKey = key;
                     key = SpellKeyToSpam;
                     if (key != oldKey)
                         Console.WriteLine($"[S] Key: {key}.");
                 }
-                else if (WindowsManager.IsKeyPressed(InteractClickingKey))
+                else if (WindowsManager.IsKeyPressed(InteractSwitchKey))
                 {
                     var oldKey = key;
                     key = InteractKeyToSpam;
