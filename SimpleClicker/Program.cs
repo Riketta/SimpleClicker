@@ -17,7 +17,11 @@ namespace SimpleClicker
         static Win32.VirtualKeys SuperClickingKey = Win32.VirtualKeys.Numpad5;
         static Win32.VirtualKeys HumanClickingKey = Win32.VirtualKeys.Numpad6;
         
-        static Win32.VirtualKeys KeyToSpam = Win32.VirtualKeys.Q;
+        static Win32.VirtualKeys SpellClickingKey = Win32.VirtualKeys.Numpad2;
+        static Win32.VirtualKeys InteractClickingKey = Win32.VirtualKeys.Numpad3;
+
+        static Win32.VirtualKeys SpellKeyToSpam = Win32.VirtualKeys.Q;
+        static Win32.VirtualKeys InteractKeyToSpam = Win32.VirtualKeys.Numpad0;
 
         enum ClickingType
         {
@@ -75,6 +79,21 @@ namespace SimpleClicker
                     if (clickingType != ClickingType.Human)
                         Console.WriteLine("Selected: Human clicking.");
                     clickingType = ClickingType.Human;
+                }
+
+                if (WindowsManager.IsKeyPressed(SpellClickingKey))
+                {
+                    var oldKey = key;
+                    key = SpellKeyToSpam;
+                    if (key != oldKey)
+                        Console.WriteLine($"[S] Key: {key}.");
+                }
+                else if (WindowsManager.IsKeyPressed(InteractClickingKey))
+                {
+                    var oldKey = key;
+                    key = InteractKeyToSpam;
+                    if (key != oldKey)
+                        Console.WriteLine($"[I] Key: {key}.");
                 }
 
                 if (WindowsManager.IsKeyPressed(ToggleClickingKey))
