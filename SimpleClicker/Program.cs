@@ -63,8 +63,9 @@ namespace SimpleClicker
 
             ClickingType clickingType = ClickingType.Human;
             Win32.VirtualKeys key = SpellKeyToSpam;
-            Console.WriteLine($"[!] Default mode: {clickingType}");
-            Console.WriteLine($"[!] Default key: {key}");
+            Console.WriteLine($"[!] Default clicking mode: {clickingType}. To switch: [{ClickingType.Super} = {SuperClickingKey}], [{ClickingType.Human} = {HumanClickingKey}].");
+            Console.WriteLine($"[!] Default key to spam: {key}. To switch: [{SpellClickingKey} to spam {SpellKeyToSpam}], [{InteractClickingKey} to spam {InteractKeyToSpam}].");
+            Console.WriteLine($"[!] Toggle key: [{ToggleClickingKey}]. Game window should be in focus.");
 
             Console.WriteLine("Clicking loop...");
             bool toggle = false;
