@@ -51,6 +51,8 @@ namespace SimpleClicker
                     Console.WriteLine("Warning: window focus check is ignored!");
                     ignoreFocusCheck = true;
                 }
+                else
+                    Console.WriteLine("To allow the clicker to send commands to the target window when it is not in focus, use the --ignorefocuscheck argument.");
             }
 
             Console.WriteLine("Getting process");
