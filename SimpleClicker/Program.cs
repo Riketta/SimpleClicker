@@ -46,7 +46,6 @@ namespace SimpleClicker
             bool ignoreFocusCheck = false;
             foreach (var arg in args)
             {
-                Console.WriteLine(arg);
                 if (arg == "--ignorefocuscheck")
                 {
                     Console.WriteLine("Warning: window focus check is ignored!");
