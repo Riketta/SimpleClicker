@@ -43,6 +43,16 @@ namespace SimpleClicker
         {
             Console.WriteLine("### Simple Clicker ver. {0} ###", Assembly.GetEntryAssembly().GetName().Version.ToString());
 
+            bool ignoreFocusCheck = false;
+            foreach (var arg in args)
+            {
+                if (arg == "--ignorefocuscheck")
+                {
+                    Console.WriteLine("Warning: window focus check is ignored!");
+                    ignoreFocusCheck = true;
+                }
+            }
+
             Console.WriteLine("Getting process");
             Process[] processes = Process.GetProcesses();
             Process process = processes.First(p => p.ProcessName == "WowClassic" || p.ProcessName == "Wow-64" || p.ProcessName == "Wow");
@@ -71,7 +81,7 @@ namespace SimpleClicker
             bool toggle = false;
             while (true)
             {
-                if (!WindowsManager.IsWindowInFocus(handle))
+                if (!ignoreFocusCheck && !WindowsManager.IsWindowInFocus(handle))
                     continue;
 
                 if (WindowsManager.IsKeyPressed(SuperClickingKey))
