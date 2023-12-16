@@ -11,7 +11,7 @@ A simple clicker that can be used to tag mobs in World of Warcraft.
 By default (on startup) human mode is enabled.  
 By default the clicker will spam spell key Q.  
 
-Use the --addeddelay= argument to use added delay between clicks. Example: --addeddelay=50.
+Use the --addeddelay= argument to use added delay between clicks. Example: --addeddelay=50.  
 Use the --ignorefocuscheck argument to allow the clicker to send commands to the target window when it is not in focus.  
 
 ## Macro
