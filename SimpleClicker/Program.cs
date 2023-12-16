@@ -24,6 +24,11 @@ namespace SimpleClicker
         static Win32.VirtualKeys SpellKeyToSpam = Win32.VirtualKeys.Q;
         static Win32.VirtualKeys InteractKeyToSpam = Win32.VirtualKeys.Numpad0;
 
+        /// <summary>
+        /// Added delay between clicks in milliseconds.
+        /// </summary>
+        static int? AddedDelayBetweenClicks = null;
+
         enum ClickingType
         {
             Super,
@@ -51,10 +56,19 @@ namespace SimpleClicker
                     Console.WriteLine("Warning: window focus check is ignored!");
                     ignoreFocusCheck = true;
                 }
+                else if (arg.StartsWith("--addeddelay="))
+                {
+                    AddedDelayBetweenClicks = int.Parse(arg.Substring("--addeddelay=".Length).Trim());
+                    Console.WriteLine($"Added delay: {AddedDelayBetweenClicks} ms.");
+                }
             }
             if (!ignoreFocusCheck)
                 Console.WriteLine("To allow the clicker to send commands to the target window when it is not in focus use the --ignorefocuscheck argument.");
-
+            if (AddedDelayBetweenClicks is null)
+            {
+                Console.WriteLine("To use added delay between clicks use use the --addeddelay= argument. Example: --addeddelay=50.");
+                AddedDelayBetweenClicks = 0;
+            }
 
             Console.WriteLine("Getting process");
             Process[] processes = Process.GetProcesses();
@@ -126,7 +140,7 @@ namespace SimpleClicker
 
                 int delay = clickingType == ClickingType.Super ? 0 : GetHumanInputDelay();
                 WindowsManager.PressKey(handle, key, delay);
-                Thread.Sleep(delay);
+                Thread.Sleep(delay + AddedDelayBetweenClicks.Value);
             }
         }
 
