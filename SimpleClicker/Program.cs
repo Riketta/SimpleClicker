@@ -98,44 +98,45 @@ namespace SimpleClicker
             bool toggle = false;
             while (true)
             {
-                if (!ignoreFocusCheck && !WindowsManager.IsWindowInFocus(handle))
-                    continue;
+                bool isWindowInFocus = WindowsManager.IsWindowInFocus(handle);
+                if (isWindowInFocus)
+                {
+                    if (WindowsManager.IsKeyPressed(SuperClickingKey))
+                    {
+                        if (clickingType != ClickingType.Super)
+                            Console.WriteLine("Selected: Super clicking.");
+                        clickingType = ClickingType.Super;
+                    }
+                    else if (WindowsManager.IsKeyPressed(HumanClickingKey))
+                    {
+                        if (clickingType != ClickingType.Human)
+                            Console.WriteLine("Selected: Human clicking.");
+                        clickingType = ClickingType.Human;
+                    }
 
-                if (WindowsManager.IsKeyPressed(SuperClickingKey))
-                {
-                    if (clickingType != ClickingType.Super)
-                        Console.WriteLine("Selected: Super clicking.");
-                    clickingType = ClickingType.Super;
-                }
-                else if (WindowsManager.IsKeyPressed(HumanClickingKey))
-                {
-                    if (clickingType != ClickingType.Human)
-                        Console.WriteLine("Selected: Human clicking.");
-                    clickingType = ClickingType.Human;
+                    if (WindowsManager.IsKeyPressed(SpellSwitchKey))
+                    {
+                        var oldKey = key;
+                        key = SpellKeyToSpam;
+                        if (key != oldKey)
+                            Console.WriteLine($"[S] Key: {key}.");
+                    }
+                    else if (WindowsManager.IsKeyPressed(InteractSwitchKey))
+                    {
+                        var oldKey = key;
+                        key = InteractKeyToSpam;
+                        if (key != oldKey)
+                            Console.WriteLine($"[I] Key: {key}.");
+                    }
+
+                    if (WindowsManager.IsKeyPressed(ToggleClickingKey))
+                    {
+                        toggle = !toggle;
+                        Console.WriteLine($"[{(toggle ? "+" : "-")}] New state: {(toggle ? $"Clicking - [{clickingType}]" : "Not clicking")}.");
+                    }
                 }
 
-                if (WindowsManager.IsKeyPressed(SpellSwitchKey))
-                {
-                    var oldKey = key;
-                    key = SpellKeyToSpam;
-                    if (key != oldKey)
-                        Console.WriteLine($"[S] Key: {key}.");
-                }
-                else if (WindowsManager.IsKeyPressed(InteractSwitchKey))
-                {
-                    var oldKey = key;
-                    key = InteractKeyToSpam;
-                    if (key != oldKey)
-                        Console.WriteLine($"[I] Key: {key}.");
-                }
-
-                if (WindowsManager.IsKeyPressed(ToggleClickingKey))
-                {
-                    toggle = !toggle;
-                    Console.WriteLine($"[{(toggle ? "+" : "-")}] New state: {(toggle ? $"Clicking - [{clickingType}]" : "Not clicking")}.");
-                }
-
-                if (!toggle)
+                if (!toggle || !(ignoreFocusCheck || isWindowInFocus))
                     continue;
 
                 int delay = clickingType == ClickingType.Super ? 0 : GetHumanInputDelay();
